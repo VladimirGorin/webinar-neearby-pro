@@ -18,12 +18,13 @@ module.exports = class SocketServer {
         // this._roomDatas[0] = {}
         // this._roomDatas[1] = {}
         this.winner = 0
-        this.userCount = []
+        this.userCount = 0
         this.autowebinarUserCount = {}
         this.autowebinarRoomData = {}
         this.roomState = {}
         this.events = {}
         this.result = {}
+        this.updateRoomStateFlag = {}
     }
 
     create() {
@@ -58,6 +59,7 @@ module.exports = class SocketServer {
 
         connection.on('close', () => {
             this.winner -= 1
+            this.userCount -= 1
             this.connections.delete(address)
         })
     }
@@ -67,7 +69,10 @@ module.exports = class SocketServer {
             for (const roomType in this._rooms) {
                 for (const i in this._rooms[roomType]) {
                     const roomItem = this._rooms[roomType][i]
-                    this.userUpdate(roomType, this.userCount.length, i)
+                    if (this.userCount < 0) {
+                        this.userCount = 0
+                    }
+                    this.userUpdate(roomType, this.userCount, i)
                     if (this.autowebinarRoomData.hasOwnProperty(i)) {
                         if (this.roomState[i] == 0) {
                             this.autowebinarUserCount[i] = this.getRandomArbitrary((this.autowebinarRoomData[i]['viewersQuantityStart'] - this.autowebinarRoomData[i]['viewersQuantityStart']/10), (this.autowebinarRoomData[i]['viewersQuantityStart'] + 10)) 
@@ -85,7 +90,7 @@ module.exports = class SocketServer {
                                 connect.connection.send(JSON.stringify({
                                     action: "updateInfo",
                                     data: {
-                                        users: this.userCount.length
+                                        users: this.userCount
                                     }
                                 }))
                             } else {
@@ -128,13 +133,13 @@ module.exports = class SocketServer {
             connect.user = command.data
             this.winner++
             if (!command.data.isAutowebinar) {
-                if (!this.userCount.includes(command.data.login)) {
-                    this.userCount.push(command.data.login)
-                }
+                this.userCount += 1
             } else {
                 const index = command.data.chat + '-' + command.data.roomNumber
-                this.autowebinarRoomData[index] = command.data.roomData
-                this.roomState[index] = command.data.state
+                this.autowebinarRoomData[index] = command.data.roomData      
+                if (!this.roomState.hasOwnProperty(index)) {
+                    this.roomState[index] = command.data.state
+                }
             }
             if (!connect?.user?.type) {
                 return false
@@ -178,36 +183,11 @@ module.exports = class SocketServer {
             }
             const index = command.data.chat + '-' + command.data.roomNumber
             if (this.roomState.hasOwnProperty(index)) {
-                this.roomState[index] = command.data.updateState
-            }
-        }
-
-        if (command.action == "join") {
-            if (!connect.user) {
-                return
-            }
-            if (isAutowebinar != 1) {
-                if (this._rooms[isAutowebinar].hasOwnProperty(command.data.chat)) {
-                    if (!this._rooms[isAutowebinar][command.data.chat].includes(address)) {
-                        this._rooms[isAutowebinar][command.data.chat].push(address)
-                    }
-                } else {
-                    this._rooms[isAutowebinar][command.data.chat] = [address]
-                }
-            } else {
-                const index = command.data.chat + '-' + command.data.roomNumber
-                if (this._rooms[isAutowebinar].hasOwnProperty(index)) {
-                    if (!this._rooms[isAutowebinar][index].includes(address)) {
-                        this._rooms[isAutowebinar][index].push(address)
-                        if (this.events[index]?.length) {
-                            for (let i = 0; i < this.events[index].length; i++) {
-                                const connectForSend = this.connections.get(address)
-                                connectForSend.connection.send(JSON.stringify(this.events[index][i]))
-                            }
-                        }
-                    }
-                } else {
-                    this._rooms[isAutowebinar][index] = [address]
+                console.log(this.roomState)
+                if (this.roomState[index] != command.data.updateState) {
+                    this.roomState[index] = command.data.updateState
+                    console.log(command.data.updateState)
+                    console.log(this.roomState)
                     const broadcastId = command.data.chat
                     let res = null
                     let eventList = []
@@ -236,7 +216,7 @@ module.exports = class SocketServer {
                             let temp = tempData[i];
                             // temp.timestamp = temp.timestamp + ct
                             temp.auth = JSON.parse(temp.auth)
-
+    
                             // const data = {
                             //     ...connect.user,
                             //     device: command.data.device,
@@ -269,7 +249,7 @@ module.exports = class SocketServer {
                                 }
                             } else if (temp.actionType == 'deleteChat') {
                                 const deleteChat = JSON.parse(temp.data)
-
+    
                                 let deleteData = await this._mysql.execute(`
                                     SELECT *
                                     FROM event_log 
@@ -424,6 +404,38 @@ module.exports = class SocketServer {
                         await runTimer(timeList[i], i);
                         // console.log( 'iterating', timeList[i]);
                     } 
+                } else {
+                    if (this.events[index]?.length) {
+                        for (let i = 0; i < this.events[index].length; i++) {
+                            const connectForSend = this.connections.get(address)
+                            connectForSend.connection.send(JSON.stringify(this.events[index][i]))
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        if (command.action == "join") {
+            if (!connect.user) {
+                return
+            }
+            if (isAutowebinar != 1) {
+                if (this._rooms[isAutowebinar].hasOwnProperty(command.data.chat)) {
+                    if (!this._rooms[isAutowebinar][command.data.chat].includes(address)) {
+                        this._rooms[isAutowebinar][command.data.chat].push(address)
+                    }
+                } else {
+                    this._rooms[isAutowebinar][command.data.chat] = [address]
+                }
+            } else {
+                const index = command.data.chat + '-' + command.data.roomNumber
+                if (this._rooms[isAutowebinar].hasOwnProperty(index)) {
+                    if (!this._rooms[isAutowebinar][index].includes(address)) {
+                        this._rooms[isAutowebinar][index].push(address)
+                    }
+                } else {
+                    this._rooms[isAutowebinar][index] = [address]
                 }
             }
 
@@ -1549,6 +1561,12 @@ module.exports = class SocketServer {
 
                 await this._mysql.execute(`
                    UPDATE webinar set status = 0 where id = ${command.data.chat}
+                `)
+                // await this._mysql.execute(`
+                //     DELETE FROM webinar WHERE id = ${command.data.chat}
+                // `)
+                await this._mysql.execute(`
+                    DELETE FROM ghoste WHERE webinarId = ${command.data.chat}
                 `)
 
                 console.log('finish stream', command.data.chat)

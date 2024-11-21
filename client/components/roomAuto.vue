@@ -1129,7 +1129,7 @@ export default {
         //   return (item.msg)})
         this.comment = data.data.comment
         this.commentData = data.data.commentData
-        if (this.comment !== '' && this.comment !== null) {
+        if (this.comment) {
           var parseData = {
             id: data.data.id,
             msg: this.comment,
@@ -1460,8 +1460,6 @@ export default {
               document.getElementById('screen__overlay').style.display = 'block';
               rt = new Rutube();
 
-              console.log(rt)
-
               rt.Player('screensaverVideo', {
                 width: document.getElementById('screensaverVideo').offsetWidth,
                 height: document.getElementById('screensaverVideo').offsetHeight,
@@ -1607,7 +1605,7 @@ export default {
                       let dateStart = this.dateStart
                       const diff = dateStart - now
                       if (diff >= 0 && diff < 1000) {
-                        this.dateStartPole = "В эфире"
+                        this.dateStartPole = ""
                         if (this.isAdmin || this.isModer) {
                           let roomData = this.$store.state.roomData
                           if (roomData?.roomId !== this.webinarId) {
@@ -1688,7 +1686,7 @@ export default {
                         if (!this.isAutoWebinar) {
                           this.dateStartPole = "Нажмите на кнопку «Начать трансляцию»!"
                         } else {
-                          this.dateStartPole = "В эфире"
+                          this.dateStartPole = ""
                           this.socket.send(JSON.stringify({
                             action: "startStream",
                             data: {
@@ -1703,7 +1701,7 @@ export default {
                         if (!this.isAutoWebinar) {
                           this.dateStartPole = "Ожидание начала эфира от ведущего"
                         } else {
-                          this.dateStartPole = "В эфире"
+                          this.dateStartPole = ""
                           this.start()
                         }
                       }
@@ -1786,6 +1784,144 @@ export default {
             // this.authorStatus = data.userStatus
             // this.authorName = data.userName
             // this.title = data.title
+
+            if (data.data.screensaverVideo) {
+              if (this.screensaverVideo) {
+                if (this.screensaverVideo !== data.data.screensaverVideo) {
+                  rt.stop()
+                  rt = null
+                  this.screensaverVideo = data.data.screensaverVideo
+                  if (!this.startState) {
+                    document.getElementById('screensaverVideo').style.display = 'block';
+                    document.getElementById('screen__overlay').style.display = 'block';
+                    rt = new Rutube();
+
+                    rt.Player('screensaverVideo', {
+                      width: document.getElementById('screensaverVideo').offsetWidth,
+                      height: document.getElementById('screensaverVideo').offsetHeight,
+                      videoId: this.screensaverVideo,
+                      "events": {
+                        "onReady": onPlayerReady,
+                        "onStateChange": onPlayerStateChange
+                      }
+                    });
+
+                    function onPlayerReady(event) {
+                      console.log('Плеер загружен.');
+                      console.log(event); // { videoId: '6e5e06ad0f3104ae47fb0f69d2198855', clientId: 'e56df991-ca59-4036-91b8-e2913944f84c' }
+
+                      setTimeout(rt.play(), 700);
+                      
+                      setTimeout(function() {
+                        document.getElementById('screen__overlay').style.display = 'none'
+                      }, 2000)
+
+                      setTimeout(rt.unMute(), 5000);
+                    }
+
+                    function onPlayerStateChange(event) {
+                      if (event.playerState.PAUSED) {
+                        document.getElementById('screen__overlay').style.display = 'block';
+                        console.log('PAUSED');
+                        console.log(rt.currentDuration()); // 41.635709
+                      }
+
+                      if (event.playerState.ENDED) {
+                        console.log('ENDED');
+
+                        // если текущее видео закончилось, переход к другому с ID d124f6d7c977b94031051409aa55648a
+                        // rt.changeVideo({
+                        //   id: 'd124f6d7c977b94031051409aa55648a',
+                        // });
+                      }
+
+                      // if (event.playerState.PLAYING && !jumpToSeek) {
+                      //   rt.seekTo({ time: 124 });
+                      //   jumpToSeek = true;
+                      // }
+                    }
+                  }
+                }
+              } else {
+                this.screensaverVideo = data.data.screensaverVideo
+                if (!this.startState) {
+                  document.getElementById('screensaverVideo').style.display = 'block';
+                  document.getElementById('screen__overlay').style.display = 'block';
+                  rt = new Rutube();
+
+                  rt.Player('screensaverVideo', {
+                    width: document.getElementById('screensaverVideo').offsetWidth,
+                    height: document.getElementById('screensaverVideo').offsetHeight,
+                    videoId: this.screensaverVideo,
+                    "events": {
+                      "onReady": onPlayerReady,
+                      "onStateChange": onPlayerStateChange
+                    }
+                  });
+
+                  function onPlayerReady(event) {
+                    console.log('Плеер загружен.');
+                    console.log(event); // { videoId: '6e5e06ad0f3104ae47fb0f69d2198855', clientId: 'e56df991-ca59-4036-91b8-e2913944f84c' }
+
+                    setTimeout(rt.play(), 700);
+                    
+                    setTimeout(function() {
+                      document.getElementById('screen__overlay').style.display = 'none'
+                    }, 2000)
+
+                    setTimeout(rt.unMute(), 5000);
+                  }
+
+                  function onPlayerStateChange(event) {
+                    if (event.playerState.PAUSED) {
+                      document.getElementById('screen__overlay').style.display = 'block';
+                      console.log('PAUSED');
+                      console.log(rt.currentDuration()); // 41.635709
+                    }
+
+                    if (event.playerState.ENDED) {
+                      console.log('ENDED');
+
+                      // если текущее видео закончилось, переход к другому с ID d124f6d7c977b94031051409aa55648a
+                      // rt.changeVideo({
+                      //   id: 'd124f6d7c977b94031051409aa55648a',
+                      // });
+                    }
+
+                    // if (event.playerState.PLAYING && !jumpToSeek) {
+                    //   rt.seekTo({ time: 124 });
+                    //   jumpToSeek = true;
+                    // }
+                  }
+                }
+              }
+              
+              
+            }
+            this.screensaverPhoto = data.data.screensaverPhoto
+            this.screensaverAudio = data.data.screensaverAudio
+            if (!this.startState) {
+              if (this.screensaverPhoto) {
+                document.getElementById("black").style.backgroundImage = "url("+this.$config.staticURL + "/" + this.screensaverPhoto+")"
+                if (this.screensaverAudio) {
+                  console.log("audio====>", this.screensaverAudio)
+                  document.getElementById("screensaverAudio").src = this.$config.staticURL + "/" + this.screensaverAudio
+                  document.getElementById("screensaverAudio").play()
+                  document.getElementById("screensaverAudio").addEventListener('play', () => this.audioPlayerStatus = true);
+                  document.getElementById("screensaverAudio").addEventListener('pause', () => this.audioPlayerStatus = false);
+                }
+              } else if (this.screensaverAudio) {
+                console.log("audio====>", this.screensaverAudio)
+                // this.newAudio = new Audio(this.$config.staticURL + '/' + this.screensaverAudio)
+                // this.newAudio.loop = true;
+                // this.newAudio.play()
+                document.getElementById("black").style.backgroundImage = "url("+this.$config.staticURL + "/defaultSplashImage.jpg)"
+                document.getElementById("screensaverAudio").src = this.$config.staticURL + "/" + this.screensaverAudio
+                document.getElementById("screensaverAudio").play()
+                document.getElementById("screensaverAudio").addEventListener('play', () => this.audioPlayerStatus = true);
+                document.getElementById("screensaverAudio").addEventListener('pause', () => this.audioPlayerStatus = false);
+              }
+            }
             const newData = {
               roomTitle: data.title,
               authorStatus: data.userStatus,
@@ -1795,7 +1931,7 @@ export default {
             
             this.comment = data.comment
             this.commentData = data.commentData
-            if (this.comment !== '' && this.comment !== null) {
+            if (this.comment) {
               var parseData = {
                 msg: this.comment,
                 user: JSON.parse(this.commentData)
@@ -1923,7 +2059,7 @@ export default {
                     const diff = dateStart - now
 
                     if (diff >= 0 && diff < 1000) {
-                      this.dateStartPole = "В эфире"
+                      this.dateStartPole = ""
                       if (this.isAdmin || this.isModer) {
                         let roomData = this.$store.state.roomData
                         if (roomData?.roomId !== this.webinarId) {
@@ -2004,7 +2140,7 @@ export default {
                       if (!this.isAutoWebinar) {
                         this.dateStartPole = "Нажмите на кнопку «Начать трансляцию»!"
                       } else {
-                        this.dateStartPole = "В эфире"
+                        this.dateStartPole = ""
                         this.socket.send(JSON.stringify({
                           action: "startStream",
                           data: {
@@ -2019,7 +2155,7 @@ export default {
                       if (!this.isAutoWebinar) {
                         this.dateStartPole = "Ожидание начала эфира от ведущего"
                       } else {
-                        this.dateStartPole = "В эфире"
+                        this.dateStartPole = ""
                         this.start()
                       }
                     }
@@ -3565,7 +3701,7 @@ export default {
             this.dateStartPole = "Вебинар закончился"
           }
           if (diff >= 0 && diff < 1000) {
-            this.dateStartPole = "В эфире"
+            this.dateStartPole = ""
             clearInterval(int)
             return
           } 
@@ -4002,7 +4138,7 @@ a {
 .room {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   width: 67%;
   height: fit-content;
   position: relative;
@@ -4666,6 +4802,10 @@ span {
     height: 300px;
   }
 
+  .chat {
+    margin-top: 10px;
+  }
+
   .header-wrapper {
     height: 90px;
   }
@@ -4796,11 +4936,12 @@ span {
   }
 
   .webinar__chat__chat {
-    height: 360px;
-    max-height: 400px;
+    height: 410px;
+    max-height: 450px;
   }
   #rightMessage {
     position: fixed;
+    width:80%;
     left: 10%;
     bottom: 10px;
   }

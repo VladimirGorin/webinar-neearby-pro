@@ -613,14 +613,7 @@
                     <input class="input__option" v-model="webinarData.source" type="text" disabled> -->
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                       <label class="label__webinar">Видео трансляция<span class="red--text">*</span>:</label>
-                      <!-- <input class="input__option" v-model="source" type="text"> -->
-                      <v-file-input
-                        style=""
-                        class=""
-                        id="source"
-                        v-model="webinarData.source"
-                        @change="onFileChange($event, 'sourceUrl')"
-                      />
+                      <input class="input__option" v-model="webinarData.source" type="text" disabled>
                       <div v-if="sourceProgress > 0" class="progress">
                         <div class="progress-container">
                           <div class="progress-bar" :style="{ width: sourceProgress + '%' }"></div>
@@ -630,6 +623,24 @@
                       <div v-if="loading">
                         <span>Encoding {{ spining }} </span>
                       </div>
+                    </div>
+                    <div class="button__add__link">
+                        <button style="margin-top: 25px;" class="add__title" @click="handleUpload" >Загрузить</button>
+                        <button v-if="webinarData.videoType" style="margin-top: 25px;" class="add__title" @click="downloadFile">
+                          Скачать
+                        </button>
+                      </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px; display: none;">
+                      <!-- <label class="label__webinar">Видео трансляция<span class="red--text">*</span>:</label> -->
+                      <!-- <input class="input__option" v-model="source" type="text"> -->
+                      <v-file-input
+                        style=""
+                        class=""
+                        id="source"
+                        v-model="videoSource"
+                        @change="onFileChange($event, 'sourceUrl')"
+                      />
+                      
                     </div>
                     <div class="room__checkboxx">
                       <div class="dsada">
@@ -854,7 +865,7 @@
                       </div>
                     <div style="text-align: left;" v-if="isAutowebinar">
                       <button style="margin-top: 25px; margin-left:0; color: #fff;" class="add__title" @click="goToScriptEditor">Редактор сценария</button>
-                      <button style="margin-top: 25px; margin-left:0; color: #fff;" class="add__title"><a target="_blank" :href="'/a/'+ webinarData.url" >Превью</a></button>
+                      <!-- <button style="margin-top: 25px; margin-left:0; color: #fff;" class="add__title"><a target="_blank" :href="'/a/'+ webinarData.url" >Превью</a></button> -->
                     </div>
                     </div>
                   </div>
@@ -944,6 +955,7 @@ export default {
   },
   data() {
     return {
+      videoData: null,
       downloadLink: '',
       loading: false,
       spining: '',
@@ -1226,40 +1238,23 @@ export default {
               continue
             }
 
-            if (key === 'screensaverPhoto' || key === 'screensaverAudio' || key === 'source') {
+            if (key === 'screensaverPhoto' || key === 'screensaverAudio') {
               if (value) {
                 this.webinarData[`${key}Url`] = this.$config.staticURL + '/' + value
                 let res
-                if (key === 'source') {
-                  res = this.$axios.$get(
-                    '/files/getVideoData',
-                    {
-                      params: {
-                        filename: value,
-                        videoType: data.videoType
-                      },
-                      headers: {
-                        "Authorization": localStorage.getItem('token')
-                      },
-                      responseType: 'arraybuffer'
-                    }
-                  )
-                  
-                  this.webinarData[`${key}Filename`] = value
-                } else {
-                  res = this.$axios.$get(
-                    '/files/photo',
-                    {
-                      params: {
-                        filename: value,
-                      },
-                      headers: {
-                        "Authorization": localStorage.getItem('token')
-                      },
-                      responseType: 'arraybuffer'
-                    }
-                  )
-                }
+                
+                res = this.$axios.$get(
+                  '/files/photo',
+                  {
+                    params: {
+                      filename: value,
+                    },
+                    headers: {
+                      "Authorization": localStorage.getItem('token')
+                    },
+                    responseType: 'arraybuffer'
+                  }
+                )
                 let screensaverFile = null
                 screensaverFile = new File([res], value)
                 this.webinarData[key] = screensaverFile
@@ -1268,9 +1263,6 @@ export default {
                 else if (key === 'screensaverAudio') {
                   this.screensaverAudio = screensaverFile
                   this.screensaverAudioFilename = value
-                } if (key === 'source') {
-                    this.source = screensaverFile
-                    this.sourceFilename = value
                 }
                 continue
               }
@@ -1375,6 +1367,25 @@ export default {
     }
   },
   methods: {
+    handleUpload() {
+      document.getElementById('source').click()
+    },
+    async downloadFile() {
+      try {
+        const response = await fetch(process.env.BASE_URL + `/files/download?file=${this.webinarData.source}`);
+        const blob = await response.blob();
+
+        // Create a link element for download
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', this.webinarData.source);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Clean up
+      } catch (error) {
+        console.error('File download failed:', error);
+      }
+    },
     clearModerator() {
       this.moderator = null
       this.moderatorText = ''
@@ -1603,7 +1614,6 @@ export default {
           screensaverPhoto: screensaverPhotoFilename || '',
           screensaverAudio: this.screensaverAudioFilename || '',
           screensaverVideo: this.screensaverVideo,
-          source: this.sourceFilename,
           blockChatBeforeStart: (this.webinarData.blockChatBeforeStart) ? 'Y' : 'N',
           banWords: this.webinarData.banWords.join('; '),
           addLinkNotificationSound: (this.webinarData.addLinkNotificationSound) ? 'Y' : 'N',
@@ -1876,7 +1886,7 @@ export default {
                 fileName: fileName
               })
             this.sourceFilename = encode.data?.filename
-            this.webinarData['sourceFilename'] = this.sourceFilename
+            this.webinarData.source = this.sourceFilename
             this.webinarData.videoType = 0
             this.loading = false
             clearInterval(encodeInterval)

@@ -360,27 +360,27 @@ export default {
           return this.error = "Имя содержит запрещенные слова"
         }
 
-        let candidate = null
+        // let candidate = null
 
-        try {
-          candidate = await this.$axios.$get(
-            '/users/ghostes',
-            {
-              params: {
-                name: trimmedNameGhoste,
-                webinarId: this.webinar.id,
-              }
-            }
-          )
-        } catch(err) {
-          this.error = 'Произошла ошибка при проверке польователя'
-          return
-        }
+        // try {
+        //   candidate = await this.$axios.$get(
+        //     '/users/ghostes',
+        //     {
+        //       params: {
+        //         name: trimmedNameGhoste,
+        //         webinarId: this.webinar.id,
+        //       }
+        //     }
+        //   )
+        // } catch(err) {
+        //   this.error = 'Произошла ошибка при проверке польователя'
+        //   return
+        // }
 
-        if (candidate) {
-          this.error = 'Пользователь с таким именем уже существует'
-          return
-        }
+        // if (candidate) {
+        //   this.error = 'Пользователь с таким именем уже существует'
+        //   return
+        // }
 
         try {
           const res = await this.$axios.post(

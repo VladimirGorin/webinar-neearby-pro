@@ -57,6 +57,7 @@ class FilesController {
         this.router.get('/pdfList', this.getPdfList.bind(this))   
         this.router.get('/getVideoData', this.getVideoByFilename.bind(this))
         this.router.get('/recordFileName', this.getRecordedFileName.bind(this))
+        this.router.get('/download', this.download.bind(this))
     }
 
     async loadPhoto(req, res, next) {
@@ -229,6 +230,24 @@ class FilesController {
             .sort((a, b) => b.time - a.time);
         return res.status(201).send(sortedFiles[0].file)
     };
+
+    async download(req, res) {
+        const fileName = req.query.file; // Get file name from query params
+        const filePath = path.join(__dirname, '../../../../storage/recording', fileName); // Define the full path
+
+        // Check if file exists
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).send('File not found');
+        }
+
+        // Set headers for video file download
+        res.setHeader('Content-Type', 'video/flv'); // Adjust MIME type if necessary
+        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+
+        // Stream the video file to the response
+        const fileStream = fs.createReadStream(filePath);
+        fileStream.pipe(res);
+    }
 }
 
 module.exports = FilesController
