@@ -34,6 +34,7 @@ class AuthController {
 
     async login(req, res, next) {
         try {
+            console.log("\n\nHere\n\n")
             const token = await this.loginUserUseCase.login(req.body)
 
             return res.status(201).send({

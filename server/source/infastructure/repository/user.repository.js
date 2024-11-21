@@ -8,20 +8,24 @@ class UserRepository {
         const res = await this.mysqlDriver.execute(`
         INSERT INTO other_user
             (name, email, phone)
-        VALUES 
+        VALUES
             (?, ?, ?);
         `, [userRegData.name, userRegData.email, userRegData.phone])
         return res[0]?.insertId
     }
 
     async getUserByLogin(login) {
-        
+
         const res = await this.mysqlDriver.execute(`
         SELECT *
         FROM neearby.users
         WHERE login = ?;
         `, [login])
-        return res[0]?.[0]
+
+        if(res){
+            return res[0]?.[0]
+        }
+
     }
 
     async getOtherUserByLogin(login) {
@@ -30,7 +34,7 @@ class UserRepository {
         FROM other_user
         WHERE email = ?;
         `, [login])
-        
+
         return res[0]?.[0]
     }
 
@@ -74,7 +78,7 @@ class UserRepository {
         await this.mysqlDriver.execute(`
         INSERT INTO ghoste
             (name, webinarId, translationId)
-        VALUES 
+        VALUES
             (?, ?, ?);
         `, [name, webinarId, translationId])
     }

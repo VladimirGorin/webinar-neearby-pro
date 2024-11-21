@@ -169,7 +169,7 @@
                     </div>
                     <div id="player__footer"></div>
                   </div>
-                  <div id="playerWindow" style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background: transparent;"></div> 
+                  <div id="playerWindow" style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background: transparent;"></div>
                 </div>
                 <div class="black-box" id="black" >
                   <div class="black-content">
@@ -180,12 +180,12 @@
                       </div>
                       <div id="screen__footer"></div>
                     </div>
-                    <div id='screenWindow' style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background: transparent;"></div> 
+                    <div id='screenWindow' style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background: transparent;"></div>
                     <div class="startPole" id="pole" v-if="dateStartPole != ''">
                       <v-icon aria-label="My Account" role="img" aria-hidden="false">
                         mdi-clock-time-nine-outline
                       </v-icon>
-                      <span class="logo__name">{{ dateStartPole }}</span>  
+                      <span class="logo__name">{{ dateStartPole }}</span>
                     </div>
                   </div>
                 </div>
@@ -218,9 +218,9 @@
                         <p class="link_action_notification__msg" :style="{'background-color': centerLink.color}">
                           <NuxtLink
                             is="a"
-                            :to="centerLink.msg" 
+                            :to="centerLink.msg"
                             :href="centerLink.msg"
-                            target="_blank" 
+                            target="_blank"
                             style="
                               overflow-wrap: 'anywhere',
                             "
@@ -232,7 +232,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div id="rightMessage">
                   <div class="screenContent">
                     <div class="messageUserAvatar">
@@ -264,7 +264,7 @@
                 <v-icon aria-label="My Account" role="img" aria-hidden="false">
                   mdi-clock-time-nine-outline
                 </v-icon>
-                <span class="logo__name">{{ dateStartPole }}</span>  
+                <span class="logo__name">{{ dateStartPole }}</span>
               </div>
               <div style="display: flex; justify-content: center; align-items: center" v-if="screensaverAudio" id="screensaverAudioDiv">
                 <audio controls id="screensaverAudio" src=""></audio>
@@ -288,12 +288,12 @@
                 </v-avatar>
                 <div class="webinar__chat__title">
                   <div class="subtitle">
-                      <p class="add" style="position: relative; color: black">Ведущий: 
-                        <span 
+                      <p class="add" style="position: relative; color: black">Ведущий:
+                        <span
                           @mouseover="tooltipFlag = true"
                           @mouseleave="tooltipFlag = false"
                           v-click-outside="tooltipClose"
-                          style="cursor: pointer; color: #0077FF; "  
+                          style="cursor: pointer; color: #0077FF; "
                           v-bind:class = "{'descriptionBlack' : !this.userDescription }"
                         >
                           {{ authorName }}
@@ -304,7 +304,7 @@
                       {{ userDescription }}
                     </div>
                     <p class="adds" style="color: black;margin-top: 9px;">{{ authorStatus }}</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -420,7 +420,7 @@
                         'position': 'relative',
                         width: '100%',
                         'margin-top': '5px',
-                        'border-radius': '5px', 
+                        'border-radius': '5px',
                         cursor: (isAdmin || isModer) ? 'pointer' : 'default',
                         border: ((isAdmin || isModer) && findHighlightedMessage(item)) ? '1px solid #FE6637' : 'none',
                         'background-color': getBackgroundColor(item),
@@ -430,8 +430,8 @@
                       <v-avatar size="40" style="margin-left: 5px; margin-right: 10px" color="blue">
                         <!-- {{ item.user.data[0] }} User -->
                       </v-avatar>
-                      <div 
-                        style="width: 90%; " 
+                      <div
+                        style="width: 90%; "
                         @click="highlightMessage(item)"
                         @contextmenu.prevent="showMenu('ghoste' + index)"
                       >
@@ -475,12 +475,12 @@
                           alt="Фото не загружено"
                         ></v-img>
                       </v-avatar>
-                      <div 
+                      <div
                         style="width: 90%;"
                         @click="highlightMessage(item)"
                         @contextmenu.prevent="showMenu('token' + index)"
                       >
-                        <div 
+                        <div
                           style="display: flex; justify-content: flex-start; align-items: center"
                         >
                           <p class="author__name chat_admin_color" style="font-weight: 900; display: inline-block; margin-right: 10px">{{ item.user.auth.name }}</p>
@@ -519,7 +519,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- sss -->
                 <div>
                   <div v-if="pinItems.length !== 0" class="customLine"></div>
@@ -538,8 +538,8 @@
                         <v-avatar size="40" color="blue">
                           <!-- {{ item.user.data[0] }} User -->
                         </v-avatar>
-                        <div 
-                          style="width: 90%; " 
+                        <div
+                          style="width: 90%; "
                           @contextmenu.prevent="showMenu('pin' + index)"
                         >
                           <div style="display: flex; justify-content: space-between; align-items: center">
@@ -547,9 +547,9 @@
                               <p class="author__name" style="font-weight: 900; display: inline-block; ">
                                 {{ item.user.auth.login }} <!-- {{ item.user.data }} -->
                               </p>
-                              <p 
-                                style="line-height: 10px; 
-                                  font-size: 10px; 
+                              <p
+                                style="line-height: 10px;
+                                  font-size: 10px;
                                   color: rgb(73,71,71)"
                               >
                                 {{ getMessageTime(item.user.timestamp) }}
@@ -557,9 +557,9 @@
                             </div>
                             <div>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                <path 
+                                <path
                                   fill="#dac212"
-                                  fill-rule="evenodd" 
+                                  fill-rule="evenodd"
                                   d="M10 1.2V2l.5 1L6 6H2.2c-.44 0-.67.53-.34.86L5 10l-4 5 5-4 3.14 3.14a.5.5 0 0 0 .86-.34V10l3-4.5 1 .5h.8c.44 0 .67-.53.34-.86L10.86.86a.5.5 0 0 0-.86.34z"
                                 />
                               </svg>
@@ -603,11 +603,11 @@
                             alt="Фото не загружено"
                           ></v-img>
                         </v-avatar>
-                        <div 
+                        <div
                           style="width: 90%;"
                           @contextmenu.prevent="showMenu('pinToken' + index)"
                         >
-                          <div 
+                          <div
                             style="display: flex; justify-content: flex-start; align-items: center"
                           >
                             <p class="author__name chat_admin_color" style="font-weight: 900; display: inline-block; margin-right: 10px">{{ item.user.auth.name }}</p>
@@ -627,9 +627,9 @@
                         </div>
                         <div>
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                            <path 
+                            <path
                               fill="#dac212"
-                              fill-rule="evenodd" 
+                              fill-rule="evenodd"
                               d="M10 1.2V2l.5 1L6 6H2.2c-.44 0-.67.53-.34.86L5 10l-4 5 5-4 3.14 3.14a.5.5 0 0 0 .86-.34V10l3-4.5 1 .5h.8c.44 0 .67-.53.34-.86L10.86.86a.5.5 0 0 0-.86.34z"
                             />
                           </svg>
@@ -655,7 +655,7 @@
                     v-on:keyup.enter="sendMsg"
                     v-model="msg"
                     :style="{
-                      'max-width': '87%', 
+                      'max-width': '87%',
                       'margin-left': '5px',
                       display: 'inline-block',
                       outline: 'none',
@@ -666,7 +666,7 @@
                     :disabled="(iBanned || isBlockChat || !isActive || isBlockChatBeforeStart) && (!isAdmin && !isModer)"
                   ></input>
                   <div style="display: flex; justify-content: center; align-items: center; padding-left: 5px; gap: 3px; ">
-                    <button @click="onHeart" class="chat-heart" type="button" 
+                    <button @click="onHeart" class="chat-heart" type="button"
                                                   :disabled="iBanned || isBlockChat || !isActive">&nbsp;</button>
                     <button
                       id="id_of_button"
@@ -790,11 +790,11 @@
           :close-modal="closeClearChatModal"
           v-on:clear-chat="clearChat"
         />
-        <video-notification 
+        <video-notification
           v-if="videoNotification"
           :close-modal="closeVideoNotification"
         />
-        <end-webinar 
+        <end-webinar
           v-if="stopState"
           :close-modal="closeEndWebinar"
         />
@@ -854,14 +854,14 @@ export default {
   components: {
     ActionNotifications,
     SendedLink,
-    DeleteAllMessage, 
-    AddInChat, 
-    StartTranslate, 
-    LeaveRoom, 
-    SupportWebinar, 
-    BagMoneyContent, 
-    BagMoneyWait, 
-    StopStream, 
+    DeleteAllMessage,
+    AddInChat,
+    StartTranslate,
+    LeaveRoom,
+    SupportWebinar,
+    BagMoneyContent,
+    BagMoneyWait,
+    StopStream,
     VideoNotification,
     EndWebinar,
   },
@@ -983,7 +983,7 @@ export default {
     Notification.requestPermission().then(function(result) {
       console.log(result);
     });
-    
+
     // testPlayer = videojs('video-player');
     // testPlayer.on('error', function() {
     // const errorDisplay = testPlayer.getChild('errorDisplay');
@@ -1001,7 +1001,7 @@ export default {
         var el = mutations[0].target;
         var w = el.clientWidth;
         var h = el.clientHeight;
-        
+
         var isChange = mutations
           .map((m) => m.oldValue + '')
           .some((prev) => prev.indexOf('width: ' + w + 'px') == -1 || prev.indexOf('height: ' + h + 'px') == -1);
@@ -1013,9 +1013,9 @@ export default {
         el.dispatchEvent(event);
     }
 
-    var observer = new MutationObserver(checkResize); 
+    var observer = new MutationObserver(checkResize);
     observer.observe(div, {attributes: true, attributeOldValue: true, attributeFilter: ['style']});
-    
+
     if (window.innerWidth > 500 && window.innerWidth < 1921) {
       if (this.roomTitle.length < 30) {
         document.getElementById('menu_title').style.fontSize = "24px";
@@ -1035,7 +1035,7 @@ export default {
     isAutowebinar = (routePath.includes('/a/') || routePath.includes('/ann/') ? 1 : 0)
     const isSecret = (routePath.includes('/wnn/') || routePath.includes('/ann/') ? 1 : 0)
     this.isAutoWebinar = isAutowebinar
-    
+
     if (isSecret == 0 && localStorage.getItem("token")) {
       this.$axios.post(
           `/auth/check-user-token`,
@@ -1051,7 +1051,7 @@ export default {
           }
         })
     }
-    const webinarSearch = this.$route.params.id;   
+    const webinarSearch = this.$route.params.id;
     this.$axios.get(`/webinars/prettyLink?prettyLink=${webinarSearch}&isAutowebinar=${isAutowebinar}`)
       .then(data => {
         this.$axios.post(`/users/getAdminInfo`, {
@@ -1097,11 +1097,11 @@ export default {
         this.items.forEach((item) => {
           if (this.isLink(item.msg)) {
             if (item.user.color) {
-              const flag = this.sendLinks.find(m => { 
-                return m.msgLink === item.msg 
+              const flag = this.sendLinks.find(m => {
+                return m.msgLink === item.msg
                   && m.colorLink === item.user.color
                   && m.nameLink === item.user.name })
-                                
+
               if (true || !flag) {
                 this.sendLinks.push({
                   msgLink: item.msg,
@@ -1124,7 +1124,7 @@ export default {
         //     this.isCenterLink = false
         //   }, 30000);
         // }
-        
+
         // this.items = this.items.filter((item) => {
         //   return (item.msg)})
         this.comment = data.data.comment
@@ -1156,9 +1156,9 @@ export default {
         }
 
         if (data.data.backgroundImageInside) {
-          
+
           var temp = data.data.backgroundImageInside.substr(data.data.backgroundImageInside.length - 5, 1);
-          this.darkMode = temp >= 3 ?  true : false; 
+          this.darkMode = temp >= 3 ?  true : false;
 
           this.backgroundImage = {
             'background-image': `url('${this.$config.staticURL + '/' + data.data.backgroundImageInside}')`,
@@ -1191,7 +1191,7 @@ export default {
           this.isAdmin = false
         }
         this.isModer = data.data?.moderators?.includes(this.user.id)
-        this.duration = (data.data.duration !== null || data.data.duration !== 0) ? data.data.duration : 0  
+        this.duration = (data.data.duration !== null || data.data.duration !== 0) ? data.data.duration : 0
         this.allowChatLinks = (data.data?.allowChatLinks === 'Y') ? true : false
         this.playback = !this.isAutoWebinar ? data.data.playback : this.playback
         // return data.data
@@ -1203,8 +1203,8 @@ export default {
         this.webinarData.duration = 3600000;
         if (isAutowebinar && this.webinarData.viewersQuantityStart) {
           this.chatNumber = this.webinarData.viewersQuantityStart;
-          
-        } 
+
+        }
 
         this.$nextTick(() => {
           const chating = document.getElementById("chating")
@@ -1215,7 +1215,7 @@ export default {
             chatingLinks.scrollTop = chatingLinks.scrollHeight;
           }
         })
-        
+
 
         const socket = new WebSocket(process.env.SOCKET_URL);
 
@@ -1255,7 +1255,7 @@ export default {
         //   let strLogin = 'User'
         //   if(localStorage.getItem("login")) strLogin = localStorage.getItem("login")
         //   else strLogin = localStorage.getItem("nameGhoste")
-          
+
         //   socket.send(JSON.stringify({
         //     action: "auth",
         //     data: {
@@ -1279,10 +1279,10 @@ export default {
             let strLogin = 'User'
             if(localStorage.getItem("login")) strLogin = localStorage.getItem("login")
             else strLogin = localStorage.getItem("nameGhoste")
-            
+
             const date = new Date()
             const dbDate = new Date(this.dateStart)
-            const offset = date.getTimezoneOffset() 
+            const offset = date.getTimezoneOffset()
             const now = date.getTime() + (offset * 60000)
             let dateStart = dbDate.getTime() + (offset* 60000)
 
@@ -1290,7 +1290,7 @@ export default {
 
             if (tempDiff < 0) {
               let temp = 0;
-              if (this.playbackFrequency == "1min") 
+              if (this.playbackFrequency == "1min")
                 temp = 60 * 1000
               else if (this.playbackFrequency == '5min')
                 temp = 5 * 60 * 1000
@@ -1409,7 +1409,7 @@ export default {
                 users = command.data.users
               }
               localStorage.setItem("nameGhoste", 'победитель' + users)
-            }   
+            }
 
             // if (
             //   this.isAdmin
@@ -1475,7 +1475,7 @@ export default {
                 console.log(event); // { videoId: '6e5e06ad0f3104ae47fb0f69d2198855', clientId: 'e56df991-ca59-4036-91b8-e2913944f84c' }
 
                 setTimeout(rt.play(), 700);
-                
+
                 setTimeout(function() {
                   document.getElementById('screen__overlay').style.display = 'none'
                 }, 2000)
@@ -1535,7 +1535,7 @@ export default {
             }
             const date = new Date()
             const dbDate = new Date(this.dateStart)
-            const offset = date.getTimezoneOffset() 
+            const offset = date.getTimezoneOffset()
             const now = date.getTime() + (offset * 60000)
             let dateStart = dbDate.getTime() + (offset* 60000)
 
@@ -1549,7 +1549,7 @@ export default {
               if (savedTime && savedTime != 0 && (String(roomId) === String(this.webinarId))) {
                 await this.start()
               } else {
-	      
+
                 if (tempDiff < 0) {
                   if (!this.isAutoWebinar) {
                     // this.enableWebinar(this.webinarId, 1, this.isAutoWebinar)
@@ -1571,11 +1571,11 @@ export default {
                         this.dateStartPole = "Ожидание начала эфира от ведущего"
                       }
                     }
-                    
+
                   } else {
                     let temp = 0;
                     console.log(this.playbackFrequency)
-                    if (this.playbackFrequency == "1min") 
+                    if (this.playbackFrequency == "1min")
                       temp = 60 * 1000
                     else if (this.playbackFrequency == '5min')
                       temp = 5 * 60 * 1000
@@ -1593,14 +1593,14 @@ export default {
                       temp = 24 * 3600 * 1000
 
                     if (Math.floor(Math.abs(tempDiff / temp)) >= 0 ) {
-                      this.dateStart = new Date(dateStart + 180 * 60000 + (Math.floor(Math.abs(tempDiff / temp)) + 1) * temp) 
+                      this.dateStart = new Date(dateStart + 180 * 60000 + (Math.floor(Math.abs(tempDiff / temp)) + 1) * temp)
                     }
 
                     setInterval(()=> {
                       const date = new Date()
-                      const offset = date.getTimezoneOffset() 
+                      const offset = date.getTimezoneOffset()
                       const utc = date.getTime() + (offset * 60000)
-                      
+
                       const now = new Date(utc + 180 * 60000)
                       let dateStart = this.dateStart
                       const diff = dateStart - now
@@ -1611,7 +1611,7 @@ export default {
                           if (roomData?.roomId !== this.webinarId) {
                             roomData = {
                               isAutowebinar: isAutowebinar,
-                              roomId: this.webinarId, 
+                              roomId: this.webinarId,
                               playTime: moment().tz('Europe/Moscow')
                             }
                             this.$store.commit('setRoomData', roomData);
@@ -1625,12 +1625,12 @@ export default {
                           //   }
                           // }))
                           this.start()
-                        } else { 
+                        } else {
                           this.start()
                         }
                         clearInterval()
                         return
-                      } 
+                      }
                       if (diff > 1000) {
                         let dayDiff = 0
                         let dayDiffText = ""
@@ -1665,10 +1665,10 @@ export default {
                   setInterval(()=> {
                     const date = new Date()
                     const dbDate = new Date(this.dateStart)
-                    const offset = date.getTimezoneOffset() 
+                    const offset = date.getTimezoneOffset()
                     const now = date.getTime() + (offset * 60000)
                     const dateStart = dbDate.getTime() + (offset* 60000)
-                  
+
                     const diff = dateStart - now
 
                     if (diff >= 0 && diff < 1000) {
@@ -1678,7 +1678,7 @@ export default {
                         if (roomData?.roomId !== this.webinarId) {
                           roomData = {
                             isAutowebinar: isAutowebinar,
-                            roomId: this.webinarId, 
+                            roomId: this.webinarId,
                             playTime: moment().tz('Europe/Moscow')
                           }
                           this.$store.commit('setRoomData', roomData);
@@ -1706,7 +1706,7 @@ export default {
                         }
                       }
                       return
-                    } 
+                    }
                     if (diff > 1000) {
                       let dayDiff = 0
                       let dayDiffText = ""
@@ -1739,7 +1739,7 @@ export default {
             } else {
               this.dateStartPole = "На данный момент вебинар недоступен"
             }
-            
+
             // if (this.videoType) {
             //   testPlayer = videojs('video-player', {
             //     techOrder: ['html5', 'flvjs'],
@@ -1769,7 +1769,7 @@ export default {
                 chat: String(this.webinarId), // this.$route.params.id
                 roomNumber: this.roomNumber
               }
-            }))  
+            }))
 
           }
 
@@ -1811,7 +1811,7 @@ export default {
                       console.log(event); // { videoId: '6e5e06ad0f3104ae47fb0f69d2198855', clientId: 'e56df991-ca59-4036-91b8-e2913944f84c' }
 
                       setTimeout(rt.play(), 700);
-                      
+
                       setTimeout(function() {
                         document.getElementById('screen__overlay').style.display = 'none'
                       }, 2000)
@@ -1864,7 +1864,7 @@ export default {
                     console.log(event); // { videoId: '6e5e06ad0f3104ae47fb0f69d2198855', clientId: 'e56df991-ca59-4036-91b8-e2913944f84c' }
 
                     setTimeout(rt.play(), 700);
-                    
+
                     setTimeout(function() {
                       document.getElementById('screen__overlay').style.display = 'none'
                     }, 2000)
@@ -1895,8 +1895,8 @@ export default {
                   }
                 }
               }
-              
-              
+
+
             }
             this.screensaverPhoto = data.data.screensaverPhoto
             this.screensaverAudio = data.data.screensaverAudio
@@ -1928,7 +1928,7 @@ export default {
               authorName: data.userName,
             }
             this.$store.commit('updateRoom', newData);
-            
+
             this.comment = data.comment
             this.commentData = data.commentData
             if (this.comment) {
@@ -1939,7 +1939,7 @@ export default {
               this.pinItems.pop()
               this.pinItems.push(parseData)
             }
-            
+
             this.dateStart = data.dateStart
             this.playbackFrequency = data.playbackFrequency
             this.background = this.$config.staticURL + '/' + data.backgroundIn
@@ -1957,9 +1957,9 @@ export default {
             }
 
             if (data.backgroundImageInside) {
-              
+
               var temp = data.backgroundImageInside.substr(data.backgroundImageInside.length - 5, 1);
-              this.darkMode = temp >= 3 ?  true : false; 
+              this.darkMode = temp >= 3 ?  true : false;
 
               this.backgroundImage = {
                 'background-image': `url('${this.$config.staticURL + '/' + data.backgroundImageInside}')`,
@@ -1989,13 +1989,13 @@ export default {
             console.log(this.links)
             this.isAdmin = this.user.id == data.userId
             this.isModer = data?.moderators?.includes(this.user.id)
-            this.duration = (data.duration !== null || data.duration !== 0) ? data.duration : 0  
+            this.duration = (data.duration !== null || data.duration !== 0) ? data.duration : 0
             this.allowChatLinks = (data?.allowChatLinks === 'Y') ? true : false
             this.playback = !this.isAutoWebinar ? data.playback : this.playback
 
             const date = new Date()
             const dbDate = new Date(this.dateStart)
-            const offset = date.getTimezoneOffset() 
+            const offset = date.getTimezoneOffset()
             const now = date.getTime() + (offset * 60000)
             let dateStart = dbDate.getTime() + (offset* 60000)
 
@@ -2025,10 +2025,10 @@ export default {
                       this.dateStartPole = "Ожидание начала эфира от ведущего"
                     }
                   }
-                  
+
                 } else {
                   let temp = 0;
-                  if (this.playbackFrequency == "1min") 
+                  if (this.playbackFrequency == "1min")
                     temp = 60 * 1000
                   else if (this.playbackFrequency == '5min')
                     temp = 5 * 60 * 1000
@@ -2044,16 +2044,16 @@ export default {
                     temp = 12 * 3600 * 1000
                   else
                     temp = 24 * 3600 * 1000
-                  
+
                   if (Math.floor(Math.abs(tempDiff / temp)) > 0 ) {
-                    this.dateStart = new Date(dateStart + 180 * 60000 + (Math.floor(Math.abs(tempDiff / temp)) + 1) * temp) 
+                    this.dateStart = new Date(dateStart + 180 * 60000 + (Math.floor(Math.abs(tempDiff / temp)) + 1) * temp)
                   }
 
                   setInterval(()=> {
                     const date = new Date()
-                    const offset = date.getTimezoneOffset() 
+                    const offset = date.getTimezoneOffset()
                     const utc = date.getTime() + (offset * 60000)
-                    
+
                     const now = new Date(utc + 180 * 60000)
                     let dateStart = this.dateStart
                     const diff = dateStart - now
@@ -2065,7 +2065,7 @@ export default {
                         if (roomData?.roomId !== this.webinarId) {
                           roomData = {
                             isAutowebinar: isAutowebinar,
-                            roomId: this.webinarId, 
+                            roomId: this.webinarId,
                             playTime: moment().tz('Europe/Moscow')
                           }
                           this.$store.commit('setRoomData', roomData);
@@ -2079,12 +2079,12 @@ export default {
                           }
                         }))
                         // await this.start()
-                      } else { 
+                      } else {
                         this.start()
                       }
                       clearInterval()
                       return
-                    } 
+                    }
                     if (diff > 1000) {
                       let dayDiff = 0
                       let dayDiffText = ""
@@ -2119,10 +2119,10 @@ export default {
                 setInterval(()=> {
                   const date = new Date()
                   const dbDate = new Date(this.dateStart)
-                  const offset = date.getTimezoneOffset() 
+                  const offset = date.getTimezoneOffset()
                   const now = date.getTime() + (offset * 60000)
                   const dateStart = dbDate.getTime() + (offset* 60000)
-                
+
                   const diff = dateStart - now
 
                   if (diff >= 0 && diff < 1000) {
@@ -2132,7 +2132,7 @@ export default {
                       if (roomData?.roomId !== this.webinarId) {
                         roomData = {
                           isAutowebinar: isAutowebinar,
-                          roomId: this.webinarId, 
+                          roomId: this.webinarId,
                           playTime: moment().tz('Europe/Moscow')
                         }
                         this.$store.commit('setRoomData', roomData);
@@ -2160,7 +2160,7 @@ export default {
                       }
                     }
                     return
-                  } 
+                  }
                   if (diff > 1000) {
                     let dayDiff = 0
                     let dayDiffText = ""
@@ -2206,7 +2206,7 @@ export default {
             }
             this.$forceUpdate()
           }
-          
+
           if (command.action == "showScreen") {
             console.log(command.data.msg)
             const msg = command.data.msg
@@ -2230,7 +2230,7 @@ export default {
             setTimeout(() => {
               document.getElementById('rightMessage').style.display = 'none'
             }, 30000);
-              
+
           }
 
           if (command.action == "pinMessage") {
@@ -2246,7 +2246,7 @@ export default {
             }
 
             this.items.sort((a, b) => new Date(a.user.timestamp) - new Date(b.user.timestamp))
-            
+
             this.pinItems.pop()
             this.pinItems.push(command.data.pinMessage)
             console.log(this.pinItems)
@@ -2295,7 +2295,7 @@ export default {
           if (command.action == "message") {
             console.log(command.data)
             var flag = 0
-            if (command.data.user.color && command.data.user.color.includes('#') 
+            if (command.data.user.color && command.data.user.color.includes('#')
                   && command.data.msg && this.isLink(command.data.msg) ) {
               for (let i = 0; i < this.sendLinks.length; i++) {
                 if (this.sendLinks[i].msgLink === command.data.msg ) {
@@ -2312,15 +2312,15 @@ export default {
               this.items.sort((a, b) => new Date(a.user.timestamp) - new Date(b.user.timestamp))
               this.$forceUpdate()
             }
-            
+
             if (command.data.user.type !== 'link') {
-              
+
               this.$nextTick(() => {
                 const chating = document.getElementById("chating")
                 chating.scrollTop = chating.scrollHeight;
               })
-              
-              if (command.data.user.color && command.data.user.color.includes('#') 
+
+              if (command.data.user.color && command.data.user.color.includes('#')
                   && command.data.msg && this.isLink(command.data.msg) ) {
                 flag = 0;
                 for (let i = 0; i < this.sendLinks.length; i++) {
@@ -2584,9 +2584,9 @@ export default {
 
         this.socket = socket
 
-        
+
       })
-    
+
     // console.log('screensaverVideo: ', this.webinar.screensaverVideo)
     // if (this.webinar.screensaverVideo) {
     //   await this.start({
@@ -2692,7 +2692,7 @@ export default {
         } else {
           return item
         }
-      } else 
+      } else
         return item;
     },
     getBackgroundColor(item) {
@@ -2711,7 +2711,7 @@ export default {
 
     },
     closeVideoNotification() {
-      
+
       this.videoNotification = false
     },
     closeEndWebinar() {
@@ -2747,7 +2747,7 @@ export default {
             }
             console.log(this.videoNotification)
           }, 2000)
-          
+
         } else {
             console.error('Big Play Button not found');
         }
@@ -2823,7 +2823,7 @@ export default {
       console.log("action===>", data)
       let action = data.action
       if (data.user.auth.id != 0) {
-        action.username = data.user.auth.name 
+        action.username = data.user.auth.name
       }
       this.actions = [
         ...this.actions,
@@ -2845,7 +2845,7 @@ export default {
       }))
       // this.$forceUpdate()
     },
-    clickCenterLink ({type, msg}) { 
+    clickCenterLink ({type, msg}) {
       this.addActionWS({type: type, msg: msg})
       window.open(msg, '_blank');
     },
@@ -2858,7 +2858,7 @@ export default {
     getMessageTime(timestamp) {
       if (this.hideDates !== 'Y')
         return moment(timestamp).tz('Europe/Moscow').format('HH:mm')
-      else 
+      else
         return ' '
     },
     deleteMessages() {
@@ -3046,13 +3046,13 @@ export default {
       // }
     },
     changeInsideBackground(value) {
-      
+
       if (this.isAdmin || this.isModer) {
         this.socket.send(JSON.stringify({
           action: "changeInsideBackground",
           data: {
             isAutowebinar: isAutowebinar,
-            chat: String(this.webinarId), 
+            chat: String(this.webinarId),
             background: value
           }
         }))
@@ -3188,7 +3188,7 @@ export default {
       // }
       const { nameLink, msgLink, colorLink } = JSON.parse(linkData)
       // jonas
-      
+
       this.socket.send(JSON.stringify({
         action: "sendLink",
         data: {
@@ -3284,7 +3284,7 @@ export default {
         || this.iBanned
         || this.isBlockChat
         || !this.isActive)
-        && (!this.isAdmin 
+        && (!this.isAdmin
         && !this.isModer)
       ) {
         return
@@ -3317,7 +3317,7 @@ export default {
           msg: this.msg,
           isAutowebinar: isAutowebinar,
           roomNumber: this.roomNumber,
-          timestamp: moment().tz('Europe/Moscow'), // Date.now(), 
+          timestamp: moment().tz('Europe/Moscow'), // Date.now(),
         }
       }))
       this.msg = ""
@@ -3334,14 +3334,14 @@ export default {
           isAutowebinar: isAutowebinar,
           chat: String(this.webinarId), // this.$route.params.id,
           updateState: 1,
-          timestamp: moment().tz('Europe/Moscow'), // Date.now(), 
+          timestamp: moment().tz('Europe/Moscow'), // Date.now(),
           roomNumber: this.roomNumber
         }
       }))
       console.log("start")
       this.enableWebinar(this.webinarId, 1, this.isAutoWebinar)
       this.dateStartPole = ""
-      
+
       if (this.screensaverAudio) {
         console.log("audioState=================>", this.audioPlayerStatus)
         // if (this.audioPlayerStatus) {
@@ -3364,7 +3364,7 @@ export default {
       // const videoId = urlContext[urlContext.length - 1]
       // console.log(this.readyYT)
       // if(!this.readyYT){
-        
+
       //   await new Promise((_r) => {
       //     const intval = setInterval(()=> {
       //       if(this.readyYT){
@@ -3374,13 +3374,13 @@ export default {
       //     }, 1000)
       //   })
       // }
-      
+
       let playTime = this.playTime ? this.playTime : moment().tz('Europe/Moscow')
       var startTime = 0
       console.log("playTimeeeeeeeeeeeeeeee", playTime)
       let date = new Date()
       let dbDate = new Date(playTime)
-      let offset = date.getTimezoneOffset() 
+      let offset = date.getTimezoneOffset()
       let now = date.getTime() + (offset * 60000)
       let playTimeTemp = dbDate.getTime() + (offset * 60000)
 
@@ -3403,7 +3403,7 @@ export default {
       localStorage.setItem('diff', diffTime)
       document.getElementById("player__overlay").style.display = "none";
       document.getElementById("black").style.display = "none";
-      
+
 
       if (this.videoType) {
         var that = this
@@ -3466,20 +3466,20 @@ export default {
                 isAutowebinar: isAutowebinar,
                 chat: String(that.webinarId), // this.$route.params.id,
                 updateState: -1,
-                timestamp: moment().tz('Europe/Moscow'), // Date.now(), 
+                timestamp: moment().tz('Europe/Moscow'), // Date.now(),
               }
             }))
           });
         });
       }
 
-      
+
 
       // Save the current time every time the video updates its playback position
-      
+
 
       // Clear the stored time when the video ends
-      
+
       // videoPlayer.play();
       // if (this.player) {
       //   this.player.loadVideoById({
@@ -3501,7 +3501,7 @@ export default {
       //     controls: 0,
       //     cc_load_policy: 1,
       //     rel: 0,
-      //     iv_load_policy: 3, 
+      //     iv_load_policy: 3,
       //     vq: 'hd1080',
       //   },
       //   videoId: videoId,
@@ -3531,7 +3531,7 @@ export default {
       //         controls: 0,
       //         cc_load_policy: 1,
       //         rel: 0,
-      //         iv_load_policy: 3, 
+      //         iv_load_policy: 3,
       //         vq: 'hd1080',
       //       },
       //       videoId: videoId,
@@ -3561,7 +3561,7 @@ export default {
       //       controls: 0,
       //       cc_load_policy: 1,
       //       rel: 0,
-      //       iv_load_policy: 3, 
+      //       iv_load_policy: 3,
       //       vq: 'hd1080',
       //     },
       //     videoId: videoId,
@@ -3601,7 +3601,7 @@ export default {
       //   } else {
       //     event.target.playVideo();
       //   }
-        
+
       //   setTimeout(() => {
       //     // document.getElementById("black").style.opacity = "0"
       //     // document.getElementById("black").remove()
@@ -3649,7 +3649,7 @@ export default {
       function stopKeepAwake() {
         clearInterval(keepAwakeInterval);
       }
-      
+
     },
     async leave() {
       if (this.isAdmin || this.isModer) {
@@ -3686,7 +3686,7 @@ export default {
       const int = setInterval(()=> {
         const date = new Date()
         const dbDate = new Date(this.dateStart)
-        const offset = date.getTimezoneOffset() 
+        const offset = date.getTimezoneOffset()
         const utc = date.getTime() + (offset * 60000)
         const dbUtc = dbDate.getTime() + (offset* 60000)
         if (!this.isAutoWebinar) {
@@ -3704,7 +3704,7 @@ export default {
             this.dateStartPole = ""
             clearInterval(int)
             return
-          } 
+          }
           if (diff > 1000) {
             if (this.status == 1) {
               let dayDiff = 0
@@ -3760,7 +3760,7 @@ export default {
       }
       let roomData = {
         isAutowebinar: isAutowebinar,
-        roomId: this.webinarId, 
+        roomId: this.webinarId,
         playTime: moment().tz('Europe/Moscow')
       }
       console.log(roomData)
@@ -3909,8 +3909,8 @@ export default {
       if (this.hearts.length < 300) {
         const pW = this.$refs.notifiRef.offsetWidth
         this.hearts.push({
-          x: Math.random() * 30, 
-          y: 0, 
+          x: Math.random() * 30,
+          y: 0,
           w: Math.random() * pW
         })
       } else {
@@ -3991,11 +3991,11 @@ a {
   border: 1px solid gray;
 }
 .contextMenu {
-  position: absolute; 
-  width: 100%; 
-  height: 100%; 
-  display: flex; 
-  justify-content: center; 
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.5);
   z-index: 999;
 }
@@ -4046,10 +4046,10 @@ a {
 }
 
 .messageDiv {
-  width: 100%; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: flex-start; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .messageUser {
@@ -4114,7 +4114,7 @@ a {
 
 .header-wrapper {
   position: relative;
-  width: 100%; 
+  width: 100%;
   height: 10vh;
   display: flex;
   align-items: center;
@@ -4125,12 +4125,12 @@ a {
   display: none;
 }
 .room-wrapper {
-  /* display: grid; 
-  grid-template-columns: 2fr 1fr; 
+  /* display: grid;
+  grid-template-columns: 2fr 1fr;
   grid-column-gap: 20px;  */
   display: flex;
   gap: 20px;
-  padding: 10px; 
+  padding: 10px;
   height: 100%;
   /* height: 65vh; */
 }
@@ -4145,7 +4145,7 @@ a {
 }
 
 #player {
-  width: 100%; 
+  width: 100%;
   height: 100%;
   position: absolute;
   display: flex;
@@ -4154,25 +4154,25 @@ a {
 }
 
 .black-box {
-  width: 100%; 
+  width: 100%;
   height: 100%;
   position: absolute;
   /* top: -66vh; */
   left: 0px;
-  top: 0px; 
+  top: 0px;
   /* background: gray;  */
   background-color: white;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  opacity: 1; 
-  
+  opacity: 1;
+
 }
 
 .black-content {
   width: 100%;
   height: 100%;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -4182,12 +4182,12 @@ a {
   display: none;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
-  opacity: 0; 
+  transform: translate(-50%, -50%);
+  opacity: 0;
   background-color: white;
   width: 200px;
   height: 200px;
-  border-radius: 200px;  
+  border-radius: 200px;
   z-index: 9999;
 }
 
@@ -4223,7 +4223,7 @@ span.anim-heart {
   height: 100%;
   position: absolute;
   background-color: transparent;
-  animation: animHeart 5s linear 0s alternate 1, 
+  animation: animHeart 5s linear 0s alternate 1,
               horizontalIn 0.8s linear 0s infinite alternate;
 }
 
@@ -4705,7 +4705,7 @@ span {
 }
 
 .player-wrapper {
-  height: 70vh; 
+  height: 70vh;
   position: relative;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
 }
@@ -4833,7 +4833,7 @@ span {
     top: 80px;
     padding-left: 7px;
     padding-right: 10px;
-    visibility: hidden;        
+    visibility: hidden;
     z-index: 9999;
   }
 
@@ -4899,8 +4899,8 @@ span {
   .room-wrapper {
     display: flex;
     flex-direction: column;
-    padding-left: 10px; 
-    padding-right: 10px; 
+    padding-left: 10px;
+    padding-right: 10px;
     /* height: 479px; */
   }
 
@@ -4940,7 +4940,7 @@ span {
     max-height: 450px;
   }
   #rightMessage {
-    position: fixed;
+    position: absolute;
     width:80%;
     left: 10%;
     bottom: 10px;
@@ -4986,7 +4986,7 @@ span {
 }
 
 @media screen and (max-width: 500px) {
-  
+
   .action_notification__name {
     font-size: 14px;
   }
@@ -5018,7 +5018,7 @@ span {
   .profile__icon.volume img {
     width: 19px;
     height: 19px;
-  }    
+  }
   .volume {
     top: 11px;
     right: 30px;
@@ -5063,6 +5063,12 @@ span {
   .room-wrapper {
     padding-left: 10px;
     padding-right: 10px;
+  }
+}
+
+@media screen and (max-height: 681px){
+  .webinar__chat__chat{
+    height: fit-content !important;
   }
 }
 
@@ -5183,14 +5189,14 @@ input {
   border-radius: 10px;
 }
 
-.is-firefox * { 
+.is-firefox * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(226, 226, 226, 0.35) rgba(46, 27, 11, 1); 
+  scrollbar-color: rgba(226, 226, 226, 0.35) rgba(46, 27, 11, 1);
 }
 
-.is-safari * { 
+.is-safari * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(226, 226, 226, 0.35) rgba(46, 27, 11, 1); 
+  scrollbar-color: rgba(226, 226, 226, 0.35) rgba(46, 27, 11, 1);
 }
 
 /* Style the scrollbar track (background) */

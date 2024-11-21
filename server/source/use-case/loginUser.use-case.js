@@ -11,15 +11,17 @@ class LoginUserUseCase {
         this.crypt = crypt
     }
     async login(loginData){
+        console.log(loginData)
         const user = await this.userRepository.getUserByLogin(loginData.login)
+        console.log(`\n\n${user}\n\n`)
+
         if (!user) {
             throw new Error(JSON.stringify({
                 status: 404,
                 message: `User with login ${loginData.login} not found`,
             }))
         }
-        console.log(loginData.password, user.password)
-        console.log(this.crypt.compareSync(loginData.password, user.password))
+
         if (!this.crypt.compareSync(loginData.password, user.password)) {
           console.log('here')
             throw new Error(JSON.stringify({
