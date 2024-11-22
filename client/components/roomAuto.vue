@@ -1219,15 +1219,9 @@ export default {
           }
         })
 
-        console.log("test2")
-        console.log("test3")
 
         const socket = new WebSocket(process.env.SOCKET_URL);
-        console.log("test4")
 
-        console.log(process.env.SOCKET_URL)
-        console.log("test")
-        socket.send("test")
 
         const nameGhoste = localStorage.getItem("nameGhoste")
         let auth;

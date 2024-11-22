@@ -1087,14 +1087,8 @@ export default {
             chatingLinks.scrollTop = chatingLinks.scrollHeight;
           }
         })
-        console.log("test2")
-        console.log("test3")
 
         const socket = new WebSocket(process.env.SOCKET_URL);
-        console.log("test4")
-        console.log("test")
-        console.log(process.env.SOCKET_URL)
-        socket.send("test")
 
         const nameGhoste = localStorage.getItem("nameGhoste")
         let auth;
