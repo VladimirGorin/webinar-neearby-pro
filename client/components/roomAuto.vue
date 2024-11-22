@@ -1184,6 +1184,8 @@ export default {
 
         this.notificationSoundAddLink = (data.data.addLinkNotificationSound === 'Y') ? true : false
         console.log("Mounted", data.data.links)
+        console.log("test1")
+
         this.links = (data.data.links) ? data.data.links : []
         if (localStorage.getItem('token') && localStorage.getItem('userId') == data.data.userId) {
           this.isAdmin = true
@@ -1218,8 +1220,11 @@ export default {
         })
 
         console.log("test2")
+        console.log("test3")
 
         const socket = new WebSocket(process.env.SOCKET_URL);
+        console.log("test4")
+
         console.log(process.env.SOCKET_URL)
         console.log("test")
         socket.send("test")
