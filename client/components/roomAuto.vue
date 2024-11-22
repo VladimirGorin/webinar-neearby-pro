@@ -1205,6 +1205,7 @@ export default {
           this.chatNumber = this.webinarData.viewersQuantityStart;
 
         }
+        console.log("test1")
 
         this.$nextTick(() => {
           const chating = document.getElementById("chating")
@@ -1216,6 +1217,7 @@ export default {
           }
         })
 
+        console.log("test2")
 
         const socket = new WebSocket(process.env.SOCKET_URL);
         console.log(process.env.SOCKET_URL)
