@@ -38,7 +38,7 @@
               <img src="../static/svg/save.svg" alt="">
               <p class="webinar__title">Вебинары и автовебинары</p>
             </div>
-            
+
             <div class="webinar-filter">
               <input @change="handlePDFUpload" type="file" id="pdfUpload" ref="pdfFile" accept="application/pdf" style="display: none;" />
               <button @click="selectPDF" class="select-pdf">Выберите PDF-файл</button>
@@ -86,6 +86,8 @@
         <v-item-group
           multiple
           v-if="webinars.length"
+
+          style="display: flex;flex-direction: column-reverse;"
         >
           <v-item
             v-for="(webinar, index) in webinars"
@@ -101,7 +103,7 @@
                   <div class="flex justify-space-between flex-row">
                     <NuxtLink style="word-break: break-word;" is="a" :to="'/' + (webinar.autowebinar ? 'a' : 'w') + '/'+ webinar.url" :href="'/' + (webinar.autowebinar ? 'a' : 'w') + '/'+ webinar.url" target="_blank">{{ webinar.fullUrl }}</NuxtLink>
                     <div  class="hover-text"  style="margin-left: auto; position: relative">
-                      <img 
+                      <img
                         src="../static/svg/copy.svg"
                         width="23"
                         height="23"
@@ -110,14 +112,14 @@
                       >
                       <span
                         class="tooltip-text-link"
-                        id="fade" style="width: 150px;" 
+                        id="fade" style="width: 150px;"
                       > Скопировать ссылку </span> <!-- style="opacity: 0" :ref="`copy-tooltip-${webinar.id}`" -->
                     </div>
                   </div>
                   <div class="flex justify-space-between flex-row">
                     <NuxtLink style="word-break: break-word;" is="a" :to="'/' + (webinar.autowebinar ? 'ann/' : 'wnn/') + webinar.url" :href="'/' + (webinar.autowebinar ? 'ann/' : 'wnn/') + webinar.url" target="_blank">{{ webinar.fullSecretUrl }}</NuxtLink>
                     <div  class="hover-text"  style="margin-left: auto; position: relative">
-                      <img 
+                      <img
                         src="../static/svg/copy.svg"
                         width="23"
                         height="23"
@@ -126,7 +128,7 @@
                       >
                       <span
                         class="tooltip-text-link"
-                        id="fade" style="width: 150px;" 
+                        id="fade" style="width: 150px;"
                       > Скопировать ссылку </span> <!-- style="opacity: 0" :ref="`copy-tooltip-${webinar.id}`" -->
                     </div>
                   </div>
@@ -157,15 +159,15 @@
                   <div class="stat__icon" v-if="webinar.autowebinar">
                     <img src="../static/svg/duration-svgrepo-com.svg" alt="">
                     <p class="stat__title">
-                      Продолжительность : 
-                      <span> 
-                        {{webinar.duration === 0 ? 
-                          '-' : 
+                      Продолжительность :
+                      <span>
+                        {{webinar.duration === 0 ?
+                          '-' :
                           webinar.duration/1000 > 3600 ?
                             Math.floor(webinar.duration/1000/3600) + 'ч. ' + ((webinar.duration/1000)%3600 > 60 ? Math.floor(((webinar.duration/1000)%3600)/60) + 'мин. ' + Math.floor(((webinar.duration/1000)%3600)%60 )+ 'сек.' : Math.floor((webinar.duration/1000)%3600) + 'сек.')
                             :
                             (webinar.duration/1000) > 60 ? Math.floor((webinar.duration/1000)/60) + 'мин. ' + Math.floor((webinar.duration/1000)%60 )+ 'сек.' : Math.floor(webinar.duration/1000) + 'сек.'
-                        }} 
+                        }}
                       </span>
                     </p>
                   </div>
@@ -306,7 +308,7 @@ export default {
           webinar.prettyDateStart = moment(webinar.dateStart)
             .tz('Europe/Moscow')
             .format('DD.MM.YYYY в HH:mm')
-            
+
           if (!Object.hasOwn(webinar, 'lastTimeViewer')) {
             webinar.autowebinar = 1
           } else {
@@ -465,7 +467,7 @@ console.log(isAutowebinar)
       this.$refs.pdfFile.click();
 
     },
-    async handlePDFUpload(event) { 
+    async handlePDFUpload(event) {
       const file = event.target.files[0];
       if (file) {
         const formData = new FormData()
@@ -697,7 +699,7 @@ input {
   box-shadow: 3px 3px 5px 0 rgba(122, 119, 119, 0.20);
   padding: 2px 4px;
 }
-/* 
+/*
 .tooltip-text-copy {
   position: absolute;
   text-align: center;
@@ -989,7 +991,7 @@ input {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .webinar-filter-wrapper {
     gap: 5px;
   }
@@ -1227,4 +1229,3 @@ input {
   }
 }
 </style>
-

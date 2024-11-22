@@ -5074,6 +5074,10 @@ span {
   .webinar__chat__chat{
     height: fit-content !important;
   }
+  .webinar__chat__chat > #chating{
+    overflow-y: scroll;
+    max-height: 252px;
+  }
 }
 
 .dropdown {
