@@ -54,6 +54,7 @@ export default {
   methods: {
     async auth() {
       try {
+        console.log(this.$axios)
         const data = await this.$axios.$post(
           `/auth/login`
           ,{
@@ -86,14 +87,14 @@ export default {
 
 <style scoped>
 .login-page {
-  background: rgb(237, 238, 240); 
+  background: rgb(237, 238, 240);
   min-height: 100vh;
 }
 
 .login-container {
-  margin-top: 40px; 
-  width: 40%; 
-  margin-left: 50%; 
+  margin-top: 40px;
+  width: 40%;
+  margin-left: 50%;
   transform: translate(-50%, 0);
   align-items: center;
   background: #FFFFFF;
@@ -139,7 +140,7 @@ export default {
 }
 
 .btn-login {
-  margin-left: 50%; 
+  margin-left: 50%;
   transform: translate(-50%, 0);
   margin-top: 20px;
   padding: 10px 90px;
@@ -150,9 +151,9 @@ export default {
 
 @media (max-width: 1500px) {
   .login-container {
-    margin-top: 30px; 
-    width: 50%; 
-    margin-left: 50%; 
+    margin-top: 30px;
+    width: 50%;
+    margin-left: 50%;
     transform: translate(-50%, 0);
     padding: 40px 30px 20px 30px;
   }
@@ -160,9 +161,9 @@ export default {
 
 @media screen and (max-width: 769px) {
   .login-container {
-    margin-top: 30px; 
-    width: 50%; 
-    margin-left: 50%; 
+    margin-top: 30px;
+    width: 50%;
+    margin-left: 50%;
     transform: translate(-50%, 0);
     padding: 40px 30px 20px 30px;
   }
@@ -180,8 +181,8 @@ export default {
 
 @media screen and (max-width: 600px) {
   .login-container {
-    margin-top: 30px; 
-    width: 70%; 
+    margin-top: 30px;
+    width: 70%;
     padding: 20px;
   }
 
