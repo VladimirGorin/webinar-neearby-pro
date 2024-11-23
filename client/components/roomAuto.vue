@@ -278,7 +278,7 @@
                 :actions="actions"
               />
             </div>
-            <div class="room-manager"> 
+            <div class="room-manager">
               <button @click="openSurprisePopup" class="surprise-popup-button">Подарки</button>
             </div>
             <div class="chat">
@@ -3979,10 +3979,9 @@ export default {
     display: block;
   }
 
-
   #chatLinks{
     overflow-y: scroll;
-    max-height: !important;
+    max-height: none !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -4462,7 +4461,7 @@ p {
   height: 67vh !important;
   }
 }
-s
+
 
 @media (max-width: 1400px) {
   .menu__title {
@@ -5490,4 +5489,3 @@ input {
 }
 
 </style>
-

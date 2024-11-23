@@ -273,7 +273,7 @@
                 :actions="actions"
               />
             </div>
-            <div class="room-manager"> 
+            <div class="room-manager">
               <button @click="openSurprisePopup" class="surprise-popup-button">Подарки</button>
             </div>
             <div class="chat">
@@ -3758,7 +3758,7 @@ export default {
 
 @media screen and (max-width: 2000px){
   .webinar__chat__chat{
-  height: 67vh !important;
+    height: 67vh !important;
   }
 }
 
