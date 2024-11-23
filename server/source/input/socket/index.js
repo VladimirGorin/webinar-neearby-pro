@@ -459,14 +459,17 @@ module.exports = class SocketServer {
             if (!connect.user) {
                 return
             }
-            if (this._editRooms[isAutowebinar].hasOwnProperty(command.data.chat)) {
-                if (!this._editRooms[isAutowebinar][command.data.chat].includes(address)) {
-                    this._editRooms[isAutowebinar][command.data.chat].push(address)
+
+            if (this._editRooms[isAutowebinar]){
+                if (this._editRooms[isAutowebinar].hasOwnProperty(command.data.chat)) {
+                    if (!this._editRooms[isAutowebinar][command.data.chat].includes(address)) {
+                        this._editRooms[isAutowebinar][command.data.chat].push(address)
+                    }
+                } else {
+                    this._editRooms[isAutowebinar][command.data.chat] = [address]
                 }
-            } else {
-                this._editRooms[isAutowebinar][command.data.chat] = [address]
+                console.log("edit", this._editRooms)
             }
-            console.log("edit", this._editRooms)
         }
 
         let webinarId = command.data.chat

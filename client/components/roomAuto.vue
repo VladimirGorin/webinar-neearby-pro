@@ -278,6 +278,9 @@
                 :actions="actions"
               />
             </div>
+            <div class="room-manager"> 
+              <button @click="openSurprisePopup" class="surprise-popup-button">Подарки</button>
+            </div>
             <div class="chat">
               <div class="webinar__chat__user">
                 <v-avatar size="60">
@@ -3937,6 +3940,12 @@ export default {
         menu.style.visibility = "hidden";
       }
     },
+    openSurprisePopup() {
+      const popup = document.getElementById("chatLinks");
+      popup.style.display = "block"
+
+
+    },
     handleStorageChange(event) {
       if (event.key === 'sharedData') {
         const newData = JSON.parse(event.newValue);
@@ -3954,6 +3963,38 @@ export default {
 </script>
 
 <style scoped>
+
+.surprise-popup-button{
+  border: 1px solid teal;
+  border-radius: 5px;
+  min-width: 140px;
+  height: 40px;
+  font-size: 19px;
+  margin: 15px 0;
+  display:none;
+}
+
+@media screen and (max-width: 770px){
+  .surprise-popup-button{
+    display: block;
+  }
+
+
+  #chatLinks{
+    overflow-y: scroll;
+    max-height: !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000000a3;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1000;
+    padding: 45px 15%;
+  }
+}
+
 #black {
   background-size: 100% 100%;
 }
@@ -4787,7 +4828,7 @@ span {
   }
 
   #chatLinks {
-    display: none !important;
+    display: none;
   }
 
   .webinar__chat__user {
@@ -4986,6 +5027,18 @@ span {
   }
   .logo__name {
     font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .webinar__chat__chat{
+    height: 50vh !important;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .webinar__chat__chat{
+    height: 50vh !important;
   }
 }
 
@@ -5429,3 +5482,4 @@ input {
 }
 
 </style>
+

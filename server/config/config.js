@@ -12,7 +12,7 @@ module.exports = {
         DATABASE: process.env.MYSQL_DATABASE,
         HOST: process.env.MYSQL_HOST,
         USER: process.env.MYSQL_USER,
-        PASSWORD: process.env.MYSQL_PASSWORD
+        PASSWORD: Boolean(process.env.TEST_MODE) ?  process.env.MYSQL_TEST_PASSWORD : process.env.MYSQL_PASSWORD
     },
     STORAGE: {
         FILE_NAME_LENGTH: Number(process.env.STORAGE_FILE_NAME_LENGTH),

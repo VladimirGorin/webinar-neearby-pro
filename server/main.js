@@ -64,7 +64,7 @@ const UserWebinarRepository = require("./source/infastructure/repository/userWeb
             host: process.env.MYSQL_HOST,
             port: 3306,
             user: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PASSWORD,
+            password: Boolean(process.env.TEST_MODE) ?  process.env.MYSQL_TEST_PASSWORD : process.env.MYSQL_PASSWORD,
             database: process.env.MYSQL_DATABASE,
         },
     )
@@ -93,17 +93,17 @@ const UserWebinarRepository = require("./source/infastructure/repository/userWeb
     const getWebinarByIdUseCase = new GetWebinarByIdUseCase(webinarRepository)
     const getWebinarByPrettyLinkUseCase = new GetWebinarByPrettyLinkUseCase(webinarRepository)
     const deleteWebinarUseCase = new DeleteWebinarUseCase(webinarRepository)
-    
+
     const changeHideDatesUseCase = new ChangeHideDatesUseCase(userRepository)
     const ghosteUseCase = new GhosteUseCase(userRepository)
-    
+
     const getEventsByBroadcastId = new GetEventsByBroadcastIdUseCase(broadcastRepository)
     const getBroadcastByCustomUrl = new GetBroadcastByUrlUseCase(broadcastRepository)
     const deleteEventLog = new DeleteEventLogUseCase(broadcastRepository)
     const updateEventLog = new UpdateEventLogUseCase(broadcastRepository)
     const addEventLog = new AddEventLogUseCase(broadcastRepository)
     const importData = new ImportDataUseCase(broadcastRepository)
-    
+
     const authMiddlewareWrapper = require("./source/input/rest/middlewares/auth.middleware");
     const authMiddleware = await authMiddlewareWrapper(userRepository)
 
