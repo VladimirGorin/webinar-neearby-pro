@@ -3756,6 +3756,12 @@ export default {
   display:none;
 }
 
+@media screen and (max-width: 2000px){
+  .webinar__chat__chat{
+  height: 67vh !important;
+  }
+}
+
 @media screen and (max-width: 770px){
   .surprise-popup-button{
     display: block;

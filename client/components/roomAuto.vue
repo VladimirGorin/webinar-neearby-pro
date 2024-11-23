@@ -4456,6 +4456,14 @@ p {
   text-overflow: ellipsis;
 }
 
+
+@media screen and (max-width: 2000px){
+  .webinar__chat__chat{
+  height: 67vh !important;
+  }
+}
+s
+
 @media (max-width: 1400px) {
   .menu__title {
     max-width: 800px;
