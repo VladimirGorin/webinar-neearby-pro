@@ -4683,7 +4683,7 @@ span {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 75vh;
+  height: 100% !important;
   /* flex-grow: 1; */
   position: relative;
 }
