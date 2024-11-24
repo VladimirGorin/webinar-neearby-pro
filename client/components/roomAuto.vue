@@ -5039,7 +5039,7 @@ span {
 
 @media screen and (min-width: 800px) {
   .webinar__chat__chat{
-    height: 50vh !important;
+    height: 100% !important;
   }
 }
 
